@@ -1,0 +1,189 @@
+<?php
+// Démarrer la session
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['code'])) {
+    // Redirection vers la page d'accueil si non connecté
+    header('Location: accueil.html');
+}
+
+// Définir les variables de connexion à la base de données
+$user = 'root'; // Nom d'utilisateur MySQL
+$password = 'root'; // Mot de passe MySQL (par défaut pour MAMP)
+$db = 'bataillon de yopougon'; // Nom de la base de données
+$host = 'localhost'; // Nom d'hôte MySQL (par défaut pour MAMP)
+$port = 3306; // Port MySQL (par défaut pour MAMP)
+
+// Connexion à la base de données
+$connexion = mysqli_connect($host, $user, $password, $db, $port);
+
+// Vérification de la connexion
+if (!$connexion) {
+    die("La connexion à la base de données a échoué : " . mysqli_connect_error());
+}
+
+// Requête SQL pour récupérer tous les membres
+$sql = "SELECT matricule, grade, nom, prenom, compagnie, legion, fonction_compagnie, date_de_naissance FROM membre";
+$resultat = mysqli_query($connexion, $sql);
+
+$type = isset($_GET['type']) ? $_GET['type'] : '';
+
+// Mettre à jour le titre de la page en fonction du type de recherche
+switch ($type) {
+    case 'matricule':
+        $titre = "EFFECTUER UNE RECHERCHE PAR MATRICULE";
+        break;
+    case 'grade':
+        $titre = "EFFECTUER UNE RECHERCHE PAR GRADE";
+        break;
+    case 'nom':
+        $titre = "EFFECTUER UNE RECHERCHE PAR NOM";
+        break;
+    case 'compagnie':
+        $titre = "EFFECTUER UNE RECHERCHE PAR COMPAGNIE";
+        break;
+    case 'legion':
+        $titre = "EFFECTUER UNE RECHERCHE PAR LEGION";
+        break;
+    case 'date_de_naissance':
+        $titre = "EFFECTUER UNE RECHERCHE PAR DATE DE NAISSANCE";
+        break;
+    case 'fonction_compagnie':
+        $titre = "EFFECTUER UNE RECHERCHE PAR FONCTION";
+        break;
+    default:
+        $titre = "RECHERCHE";
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGB</title>
+    <link rel="stylesheet" href="recherche-par.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <img src="img/logo_bgb.png" alt="">
+            <div class="buttons">
+                <button onclick="window.location.href = 'liste.php'"><i class="fa-solid fa-list"></i>LISTE DES MEMBRES</button>
+                <button onclick="window.location.href = 'ajouter.php'"><i class="fa-solid fa-plus"></i>AJOUTER UN MEMBRE</button>
+                <button  class="active" onclick="window.location.href = 'recherche.php'"><i class="fa-solid fa-magnifying-glass"></i>RECHERCHE</button>
+            </div>
+            <div class="administrateur">
+        <h3>Administrateur</h3>
+        <?php
+        // Affichage du nom de l'administrateur s'il est présent dans la session
+        if(isset($_SESSION['nom_admin'])) {
+          echo "<span>{$_SESSION['nom_admin']}</span>";
+        }
+        ?>
+      </div>
+            <div class="logout">
+                <a href="accueil.php"><i class="fa-solid fa-right-from-bracket"></i>DECONNEXION</a>
+            </div>
+        </div>
+
+        <div class="liste">
+            <h1 id="titre"><?php echo $titre; ?></h1>
+            <div class="recherche">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" class="recherche" id="recherche" name="recherche" placeholder="RECHERCHE...">
+</div>
+
+            
+            <div class="table-container">
+        <table id="resultats">
+          <thead>
+            <tr>
+              <th>MATRICULE</th>
+              <th>GRADE</th>
+              <th>NOM</th>
+              <th>PRENOM</th>
+              <th>COMPAGNIE</th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php
+// Afficher tous les membres dans le tableau
+while ($row = mysqli_fetch_assoc($resultat)) {
+    echo "<tr class='member' onclick='window.location.href = \"info-plus.php?matricule={$row['matricule']}\"'>";
+    echo "<td>" . $row['matricule'] . "</td>";
+    echo "<td>" . $row['grade'] . "</td>";
+    echo "<td>" . $row['nom'] . "</td>";
+    echo "<td>" . $row['prenom'] . "</td>";
+    echo "<td>" . $row['compagnie'] . "</td>";
+    echo "<td style='display:none'>" . $row['legion'] . "</td>";
+    echo "<td style='display:none'>" . $row['fonction_compagnie'] . "</td>";
+    echo "<td style='display:none'>" . $row['date_de_naissance'] . "</td>";
+    echo "</tr>";
+}
+
+          ?>
+          </tbody>
+        </table>
+      </div>
+                
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('recherche').addEventListener('keyup', function() {
+            var recherche = this.value.toUpperCase();
+            var table = document.getElementById('resultats');
+            var lignes = table.getElementsByTagName('tr');
+            var titre = document.getElementById('titre');
+            
+            for (var i = 0; i < lignes.length; i++) {
+                // Index de la colonne selon le type de recherche
+                var indexColonne;
+
+                // Déterminer l'index de la colonne en fonction du titre
+                switch (titre.textContent) {
+                    case "EFFECTUER UNE RECHERCHE PAR NOM":
+                        indexColonne = 2; // Index de la colonne du nom
+                        break;
+                    case "EFFECTUER UNE RECHERCHE PAR MATRICULE":
+                        indexColonne = 0; // Index de la colonne du matricule
+                        break;
+                    case "EFFECTUER UNE RECHERCHE PAR GRADE":
+                        indexColonne = 1; // Index de la colonne du grade
+                        break;
+                    case "EFFECTUER UNE RECHERCHE PAR COMPAGNIE":
+                        indexColonne = 4; // Index de la colonne de la compagnie
+                        break;
+                    case "EFFECTUER UNE RECHERCHE PAR LEGION":
+                        indexColonne = 5; // Index de la colonne de la légion
+                        break;
+                    case "EFFECTUER UNE RECHERCHE PAR FONCTION":
+                        indexColonne = 6; // Index de la colonne de la fonction
+                        break;
+                    case "EFFECTUER UNE RECHERCHE PAR DATE DE NAISSANCE":
+                        indexColonne = 7; // Index de la colonne de la date de naissance
+                        break;
+                    default:
+                        break;
+                }
+
+                // Récupérer la cellule correspondante dans la ligne
+                var cellule = lignes[i].getElementsByTagName('td')[indexColonne];
+                if (cellule) {
+                    var contenu = cellule.textContent || cellule.innerText;
+                    // Comparer le contenu avec la recherche et afficher ou masquer la ligne
+                    if (contenu.toUpperCase().indexOf(recherche) > -1) {
+                        lignes[i].style.display = '';
+                    } else {
+                        lignes[i].style.display = 'none';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
