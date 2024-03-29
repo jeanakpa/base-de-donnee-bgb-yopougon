@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGB</title>
+    <link rel="stylesheet" href="ajouter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <img src="img/logo_bgb.png" alt="">
+            <div class="buttons">
+                <button onclick="window.location.href = 'liste.html'"><i class="fa-solid fa-list"></i>LISTE DES MEMBRES</button>
+                <button class="active" onclick="window.location.href = 'ajouter.html'"><i class="fa-solid fa-plus"></i>AJOUTER UN MEMBRE</button>
+                <button onclick="window.location.href = 'recherche.html'"><i class="fa-solid fa-magnifying-glass"></i>RECHERCHE</button>
+            </div>
+            <div class="administrateur">
+                <h3>Administrateur</h3>
+                <span>ODJE EDEN</span>
+            </div>
+            <div class="logout">
+                <a href="accueil.html"><i class="fa-solid fa-right-from-bracket"></i>DECONNEXION</a>
+            </div>
+        </div>
+
+        <div class="liste">
+            <h1>AJOUTER UN MEMBRE</h1>
+            <div class="table-container">
+                <form action="">
+                    <label for="grade" class="select">GRADE</label>
+                    <select name="grade" id="grade" class="grade" required>
+                        <option value="soldat">SOLDAT</option>
+                        <option value="caporal">CAPORAL</option>
+                        <option value="caporal-chef">CAPORAL CHEF</option>
+                        <option value="sergent">SERGENT</option>
+                        <option value="sergent-chef">SERGENT CHEF</option>
+                        <option value="adjudant">ADJUDANT</option>
+                        <option value="adjudant-chef">ADJUDANT CHEF</option>
+                        <option value="sous-lieutenant">SOUS LIEUTENANT</option>
+                        <option value="lieutenant">LIEUTENANT</option>
+                        <option value="capitaine">CAPITAINE</option>
+                        <option value="commandant">COMMANDANT</option>
+                        <option value="lieutenant-colonel">LIEUTENANT COLONEL</option>
+                        <option value="colonel">COLONEL</option>
+                        <!-- Ajoutez d'autres options de grade ici si nécessaire -->
+                    </select>
+
+                    <div class="block">
+                        <div>
+                            <label for="nom">NOM</label>
+                            <input type="text" class="nom" id="nom" name="nom" placeholder="ENTREZ LE NOM">
+                        </div>
+                        <div>
+                            <label for="prenom">PRENOM</label>
+                            <input type="text" class="prenom" id="prenom" name="prenom" placeholder="ENTREZ LE PRENOM">
+                        </div>
+                        
+                    </div>
+
+                    <div class="block">
+                        <div class="choice">
+                            <label for="telephone">NUMERO DE TELEPHONE</label>
+                            <input type="tel" class="telephone" id="telephone" name="telephone" placeholder="ENTREZ LE NUMERO DE TELEPHONE">
+                        </div>
+                        <div class="choice">
+                            <label for="date">DATE DE NAISSANCE</label>
+                            <input type="date" class="date" id="date" name="date" placeholder="DATE DE NAISSANCE">
+                        </div>
+                        
+                    </div>
+
+                    <label for="compagnie" class="select">COMPAGNIE</label>
+                    <select name="compagnie" id="compagnie" class="compagnie" required>
+                        <option value="bethesda">BETHESDA</option>
+                        <option value="niangon-adjame">NIANGON-ADJAME</option>
+                        <option value="silo">SILO</option>
+                        <option value="siloe">SILOE</option>
+                        <option value="emmaus">EMMAUS</option>
+                        <option value="beago">BEAGO</option>
+                        <option value="ephrata">EPHRATA</option>
+                        <option value="locodjro">LOCODJRO</option>
+                        <option value="abobodoume">ABOBODOUME</option>
+                        <option value="adiopodoume">ADIPODOUME</option>
+                        <!-- Ajoutez d'autres options de compagnie ici si nécessaire -->
+                    </select>
+
+                    <!-- Responsabilité de compagnie -->
+                    <div class="resp">
+                        <label>RESPONSABILITE COMPAGNIE</label>
+                        <div class="choice">
+                            <div>
+                                <input type="checkbox" id="responsable-compagnie" name="responsabilite-compagnie" value="1">
+                                <label for="responsable-compagnie">1ER RESPONSABLE</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="conseiller-compagnie" name="responsabilite-compagnie" value="1">
+                                <label for="conseiller-compagnie">CONSEILLER</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="adjoint-compagnie" value="adjoint-compagnie">
+                                <label for="adjoint-compagnie">RESPONSABLE ADJOINT</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="secretaire-compagnie" value="secretaire-compagnie">
+                                <label for="secretaire-compagnie">SECRETAIRE</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tresorier-compagnie" value="tresorier">
+                                <label for="tresorier-compagnie">TRESORIER</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="action-sociale-compagnie" value="action sociale">
+                                <label for="action-sociale-compagnie">ACTION SOCIALE</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="communicateur-compagnie" value="communicateur">
+                                <label for="communicateur-compagnie">COMMUNICATEUR</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="commissaire-compagnie" value="commissaire">
+                                <label for="commissaire-compagnie">COMMISSAIRE AUX COMPTES</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="formateur-compagnie" value="formateur">
+                                <label for="formateur-compagnie">FORMATEUR</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="boys-compagnie" value="boys">
+                                <label for="boys-compagnie">RESPONSABLE BOYS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="girls-compagnie" value="girls">
+                                <label for="girls-compagnie">RESPONSABLE GIRLS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="organisateur-compagnie" value="organisateur">
+                                <label for="organisateur-compagnie">ORGANISATEUR</label>
+                            </div>
+                        </div>
+                        <!-- Ajoutez d'autres responsabilités de compagnie ici si nécessaire -->
+                    </div>
+
+                    <select name="legion" id="legion" class="legion" required>
+                        <option value="" selected disabled>LEGION</option>
+                        <option value="niangon">NIANGON</option>
+                        <option value="yopougon">YOPOUGON</option>
+                        <!-- Ajoutez d'autres options de légion ici si nécessaire -->
+                    </select>
+
+                    <!-- Responsabilité de légion -->
+                    <div class="resp">
+                        <label>RESPONSABILITE LEGION</label>
+                        <div class="choice">
+                            <div>
+                                <input type="checkbox" id="responsable-legion" name="responsable-legion" value="responsable">
+                                <label for="responsable-legion">1ER RESPONSABLE</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="conseiller-legion" name="conseiller-legion" value="conseiller">
+                                <label for="conseiller-legion">CONSEILLER</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="adjoint-legion" name="adjoint-legion" value="adjoint">
+                                <label for="adjoint-legion">RESPONSABLE ADJOINT</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="secretaire-legion" name="secretaire-legion" value="secretaire">
+                                <label for="secretaire-legion">SECRETAIRE</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tresorier-legion" name="tresorier-legion" value="tresorier">
+                                <label for="tresorier-legion">TRESORIER</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="action-sociale-legion" name="action-sociale-legion" value="action sociale">
+                                <label for="action-sociale-legion">ACTION SOCIALE</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="communicateur-legion" name="communicateur-legion" value="communicateur">
+                                <label for="communicateur-legion">COMMUNICATEUR</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="commissaire-legion" name="commissaire-legion" value="commissaire">
+                                <label for="commissaire-legion">COMMISSAIRE AUX COMPTES</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="formateur-legion" name="formateur-legion" value="formateur">
+                                <label for="formateur-legion">FORMATEUR</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="boys-legion" name="boys-legion" value="boys">
+                                <label for="boys-legion">RESPONSABLE BOYS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="girls-legion" name="girls-legion" value="girls">
+                                <label for="girls-legion">RESPONSABLE GIRLS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="organisateur-legion" name="organisateur-legion" value="organisateur">
+                                <label for="organisateur-legion">ORGANISATEUR</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <!-- Responsabilité de bataillon -->
+                    <div class="resp">
+                        <label>RESPONSABILITE BATAILLON</label>
+                        <div class="choice">
+                            <div>
+                                <input type="checkbox" id="responsable-bataillon" name="responsable-bataillon" value="responsable">
+                                <label for="responsable-bataillon">1ER RESPONSABLE</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="conseiller-bataillon" name="conseiller-bataillon" value="conseiller">
+                                <label for="conseiller-bataillon">CONSEILLER</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="adjoint-bataillon" name="adjoint-bataillon" value="adjoint">
+                                <label for="adjoint-bataillon">RESPONSABLE ADJOINT</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="secretaire-bataillon" name="secretaire-bataillon" value="secretaire">
+                                <label for="secretaire-bataillon">SECRETAIRE</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tresorier-bataillon" name="tresorier-bataillon" value="tresorier">
+                                <label for="tresorier-bataillon">TRESORIER</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="action-sociale-bataillon" name="action-sociale-bataillon" value="action sociale">
+                                <label for="action-sociale-bataillon">ACTION SOCIALE</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="communicateur-bataillon" name="communicateur-bataillon" value="communicateur">
+                                <label for="communicateur-bataillon">COMMUNICATEUR</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="commissaire-bataillon" name="commissaire-bataillon" value="commissaire">
+                                <label for="commissaire-bataillon">COMMISSAIRE AUX COMPTES</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="formateur-bataillon" name="formateur-bataillon" value="formateur">
+                                <label for="formateur-bataillon">FORMATEUR</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="boys-bataillon" name="boys-bataillon" value="boys">
+                                <label for="boys-bataillon">RESPONSABLE BOYS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="girls-bataillon" name="girls-bataillon" value="girls">
+                                <label for="girls-bataillon">RESPONSABLE GIRLS</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="organisateur-bataillon" name="organisateur-bataillon" value="organisateur">
+                                <label for="organisateur-bataillon">ORGANISATEUR</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button><i class="fa-solid fa-plus"></i>AJOUTER</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
